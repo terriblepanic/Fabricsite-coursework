@@ -7,9 +7,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 // Только админ
-if ($_SESSION['user']['role'] !== 'admin') {
-    die('Доступ запрещён');
-}
+requireAdmin();
 
 // Получаем все заявки
 $stmt = $pdo->query("

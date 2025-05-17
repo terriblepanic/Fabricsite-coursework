@@ -13,18 +13,12 @@ if (!function_exists('h')) {
         return htmlspecialchars($s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     }
 }
-
 /* — доступ только для admin — */
-if (empty($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
-    require_once __DIR__ . '/../includes/header.php';
-    echo '<p class="errors">Доступ запрещён</p>';
-    require_once __DIR__ . '/../includes/footer.php';
-    exit;
-}
+requireAdmin();
 
 /* — справочники — */
 $fabricTypes = $pdo->query('SELECT id,name FROM fabric_types')->fetchAll(PDO::FETCH_ASSOC);
-$colors      = $pdo->query('SELECT id,name FROM colors')     ->fetchAll(PDO::FETCH_ASSOC);
+$colors      = $pdo->query('SELECT id,name FROM colors')->fetchAll(PDO::FETCH_ASSOC);
 
 $errors  = [];
 $success = false;
@@ -103,7 +97,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 /* — вывoд — */
 require_once __DIR__ . '/../includes/header.php';
 ?>
-
     <h2>Добавить новую ткань</h2>
 
 <?php if ($success): ?>

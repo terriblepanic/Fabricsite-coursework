@@ -1,14 +1,10 @@
 <?php
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../includes/auth_check.php';
-require_once __DIR__ . '/../includes/header.php';
 
 // Только для администратора
-if ($_SESSION['user']['role'] !== 'admin') {
-    echo "<p>Доступ запрещён</p>";
-    require_once __DIR__ . '/../includes/footer.php';
-    exit;
-}
+requireAdmin();
+require_once __DIR__ . '/../includes/header.php';
 
 // Обработка удаления и восстановления
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -32,7 +28,6 @@ $stmt = $pdo->query("
 ");
 $fabrics = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
 <h2>Все ткани (админ)</h2>
 
 <?php if (empty($fabrics)): ?>

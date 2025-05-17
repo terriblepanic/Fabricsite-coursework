@@ -5,14 +5,10 @@
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../includes/auth_check.php';
 require_once __DIR__ . '/../includes/csrf.php';
-require_once __DIR__ . '/../includes/header.php';
 
 // Проверяем роль администратора
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
-    echo '<p class="errors">Доступ запрещён.</p>';
-    require_once __DIR__ . '/../includes/footer.php';
-    exit;
-}
+requireAdmin();
+require_once __DIR__ . '/../includes/header.php';
 
 // Функция-экранирование
 function h(string $s): string {
@@ -58,7 +54,6 @@ $stmt = $pdo->prepare("
 $stmt->execute([$requestId]);
 $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
 <h2 class="mt-2">Чат (админ) по заявке #<?= h((string)$requestId) ?></h2>
 <div class="chat-box" style="max-width:800px; margin-bottom:1.5rem;">
     <?php if (empty($messages)): ?>

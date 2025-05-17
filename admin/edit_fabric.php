@@ -1,14 +1,10 @@
 <?php
 require_once __DIR__.'/../config/db.php';
 require_once __DIR__.'/../includes/auth_check.php';
-require_once __DIR__.'/../includes/header.php';
 
 /* доступ только админу */
-if ($_SESSION['user']['role'] !== 'admin') {
-    echo '<p class="errors">Доступ запрещён</p>';
-    require_once __DIR__.'/../includes/footer.php';
-    exit;
-}
+requireAdmin();
+require_once __DIR__.'/../includes/header.php';
 
 /* получаем ткань */
 $fabricId = (int)($_GET['id'] ?? 0);
@@ -94,7 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 /* helper */
 function h($s){ return htmlspecialchars($s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); }
 ?>
-
     <h2>Редактировать ткань</h2>
 
 <?php if ($success): ?>

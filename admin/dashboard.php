@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/../includes/auth_check.php';
+/* Проверка роли администратора */
+requireAdmin();
 require_once __DIR__ . '/../includes/header.php';
 function h($s){ return htmlspecialchars($s, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8'); }
 
@@ -139,7 +141,6 @@ $logs = $pdo->query("
      LIMIT 10
 ")->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
 <h2>Административная панель</h2>
 <p>
     <a href="export_excel.php" class="btn btn-secondary" target="_blank">
