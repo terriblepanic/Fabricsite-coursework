@@ -1,0 +1,1177 @@
+
+/* ===============================
+   Modern Glassmorphism Theme Variables
+   =============================== */
+:root {
+  --font-sans: 'Inter', Arial, sans-serif;
+  --font-heading: 'Segoe UI', Tahoma, sans-serif;
+
+  --color-primary: #3887f6;
+  --color-primary-hover: #2563eb;
+  --color-secondary: #ffd966;
+  --color-secondary-hover: #f7c948;
+  --color-bg: linear-gradient(135deg, #e0e7ef 0%, #f8fafc 100%);
+  --color-surface: rgba(255,255,255,0.35);
+  --color-surface-strong: rgba(255,255,255,0.65);
+  --color-border: rgba(180,200,255,0.24);
+  --color-text: #222d3a;
+  --color-muted: #6c7a89;
+  --color-success-bg: rgba(209, 250, 229, 0.7);
+  --color-success-border: #34d399;
+  --color-error-bg: rgba(254, 202, 202, 0.7);
+  --color-error-border: #f87171;
+
+  --radius: 20px;
+  --transition: 0.35s cubic-bezier(.55,.06,.68,.19);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  --blur: 18px;
+}
+
+/* ===============================
+   Reset & Base
+   =============================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+
+
+/* Filter form layout */
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-glass);
+  backdrop-filter: blur(var(--blur));
+  padding: 1.2rem;
+}
+.filter-form .filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+}
+.filter-form .filter-field {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+}
+.filter-form .filter-field.small {
+  flex: 0 0 auto;
+}
+.filter-form .glass-input,
+.filter-form .glass-select {
+  padding: 0.6rem 1rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.45);
+  backdrop-filter: blur(var(--blur));
+  transition: border-color var(--transition), background var(--transition);
+}
+.filter-form .glass-input:focus,
+.filter-form .glass-select:focus {
+  border-color: var(--color-primary);
+  background: rgba(255,255,255,0.75);
+  outline: none;
+}
+.filter-form .checkbox-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.45);
+  backdrop-filter: blur(var(--blur));
+  transition: background var(--transition), border-color var(--transition);
+}
+.filter-form .checkbox-item input {
+  margin: 0;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+.filter-form .checkbox-item label {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+html {
+  font-size: 100%;
+  scroll-behavior: smooth;
+}
+/* ===============================
+   Dynamic Background Glow (Enhanced & More Motion)
+   =============================== */
+body::before {
+  content: "";
+  position: fixed;
+  top: -30%;
+  left: -30%;
+  width: 160%;
+  height: 160%;
+  background: radial-gradient(
+          circle at 40% 30%,
+          rgba(56, 135, 246, 0.2),
+          transparent 60%
+  ), radial-gradient(
+          circle at 70% 80%,
+          rgba(37, 99, 235, 0.15),
+          transparent 60%
+  );
+  filter: blur(120px);
+  opacity: 0.9;
+  animation: glowMove 15s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes glowMove {
+  0% {
+    transform: translate(0%, 0%) scale(1);
+  }
+  35% {
+    transform: translate(15%, 10%) scale(1.1);
+  }
+  70% {
+    transform: translate(-15%, -8%) scale(1.05);
+  }
+  100% {
+    transform: translate(0%, 0%) scale(1);
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.8s cubic-bezier(.4,0,.2,1);
+}
+
+img, picture, video, canvas, svg {
+  max-width: 100%;
+  display: block;
+  border-radius: var(--radius);
+  transition: filter 0.3s;
+}
+
+/* ===============================
+   Typography
+   =============================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text);
+  margin-bottom: 0.5em;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 8px rgba(56,135,246,0.04);
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+/* ===============================
+   Links & Buttons
+   =============================== */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition);
+  position: relative;
+}
+a:hover, a:focus {
+  color: var(--color-primary-hover);
+}
+a::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary-hover);
+  transition: width var(--transition);
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+}
+a:hover::after, a:focus::after {
+  width: 100%;
+}
+
+button, .btn {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.65em 1.5em;
+  font-size: 1rem;
+  font-weight: 500;
+  background: var(--color-surface-strong);
+  color: var(--color-primary);
+  box-shadow: var(--shadow-glass);
+  backdrop-filter: blur(var(--blur));
+  transition:
+    background var(--transition),
+    color var(--transition),
+    transform 0.18s cubic-bezier(.4,0,.2,1),
+    box-shadow var(--transition);
+  outline: none;
+}
+button:focus, .btn:focus {
+  outline: 2px solid var(--color-primary-hover);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(56,135,246,0.10);
+}
+.btn-primary, button.btn-primary {
+  background: linear-gradient(120deg, #3887f6 60%, #7ee8fa 100%);
+  color: #fff;
+  box-shadow: 0 4px 20px 0 rgba(56,135,246,0.13);
+}
+.btn-primary:hover, button.btn-primary:hover {
+  background: linear-gradient(120deg, #2563eb 60%, #60b0f6 100%);
+  transform: translateY(-2px) scale(1.03);
+}
+.btn-secondary, button.btn-secondary {
+  background: linear-gradient(120deg, #ffd966 60%, #fff8e1 100%);
+  color: #7d5d00;
+}
+.btn-secondary:hover, button.btn-secondary:hover {
+  background: linear-gradient(120deg, #f7c948 60%, #ffe066 100%);
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* ===============================
+   Header & Navigation (Glassmorphic)
+   =============================== */
+header {
+  background: var(--color-surface);
+  box-shadow: var(--shadow-glass);
+  backdrop-filter: blur(var(--blur));
+  padding: 1.2rem 2rem;
+  border-radius: 0 0 var(--radius) var(--radius);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.logo a {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  background: linear-gradient(90deg, #3887f6 60%, #7ee8fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  letter-spacing: 0.03em;
+  text-shadow: 0 2px 16px rgba(56,135,246,0.09);
+}
+
+nav {
+  display: flex;
+  gap: 1.2rem;
+}
+nav a {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+  font-weight: 500;
+}
+nav a:hover, nav a:focus {
+  background: rgba(56,135,246,0.13);
+  color: var(--color-primary-hover);
+  box-shadow: 0 2px 12px rgba(56,135,246,0.07);
+}
+
+/* ===============================
+   Main Content
+   =============================== */
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2.5rem auto;
+  padding: 0 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ===============================
+   Forms & Inputs (Glass)
+   =============================== */
+form {
+  margin-bottom: 1.5rem;
+  /*background: var(--color-surface);*/
+  /*border-radius: var(--radius);*/
+  /*box-shadow: var(--shadow-glass);*/
+  padding: 1.5rem 2rem;
+  /*backdrop-filter: blur(var(--blur));*/
+  /*border: 1.5px solid var(--color-border);*/
+  animation: glassFadeIn 0.7s cubic-bezier(.4,0,.2,1);
+}
+.form-add_fabric {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-glass);
+  backdrop-filter: blur(var(--blur));
+  border: 1.5px solid var(--color-border);
+}
+/* ------------------------------------------
+   Универсальная «стеклянная» панель-карточка
+   ------------------------------------------ */
+.glass-panel{
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-glass);
+  backdrop-filter: blur(var(--blur));
+  animation: glassFadeIn 0.6s ease;
+  padding: 2rem;
+}
+
+/* Центровщик: держит макс-ширину и margin:auto */
+.centered{
+  width: 100%;
+  max-width: 680px;    /* подогнать при желании */
+  margin: 2.5rem auto; /* сверху-снизу и по центру */
+}
+
+/* на мобильных чуть уже и меньше отступов */
+@media (max-width: 480px){
+  .centered{
+    max-width: 95vw;
+    padding: 1.5rem 1rem;
+    margin: 1.5rem auto;
+  }
+}
+/*--------------------------------------------------
+  Универсальная сетка для больших форм
+--------------------------------------------------*/
+.form-grid{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem 2rem;
+}
+
+/* группа = label + input */
+.form-group label{
+  display:flex;
+  flex-direction:column;
+  font-weight:500;
+}
+
+/* растягиваем элемент на всю ширину сетки */
+.form-group.full{
+  grid-column:1/-1;
+}
+
+/* Make the price field stretch across the entire form grid */
+@supports(selector(:has(*))) {
+  .form-group:has(input[name="price_rub"]) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ===============================
+   Customised “Choose file” button
+   =============================== */
+input[type="file"].glass-input{
+  position: relative;       /* keep the input in normal flow */
+  overflow: hidden;         /* hide native button in some browsers            */
+}
+
+input[type="file"].glass-input::file-selector-button,
+input[type="file"].glass-input::-webkit-file-upload-button{
+  font: inherit;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.55rem 1.4rem;
+  margin-right: 0.8rem;              /* little gap before filename text       */
+  background: linear-gradient(120deg,var(--color-primary) 60%,#60b0f6 100%);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(56,135,246,0.13);
+  transition: background var(--transition),
+              transform 0.18s cubic-bezier(.4,0,.2,1);
+}
+
+input[type="file"].glass-input::file-selector-button:hover,
+input[type="file"].glass-input::-webkit-file-upload-button:hover{
+  background: linear-gradient(120deg,var(--color-primary-hover) 60%,#7ee8fa 100%);
+  transform: translateY(-1px);
+}
+
+/* Ensure the custom glass checkbox keeps its size within flex containers */
+.checkbox-item .glass-checkbox{
+  flex-shrink: 0;
+}
+
+/* линия чекбоксов */
+.checkbox-line{
+  display:flex;
+  gap:1rem;
+  align-items:center;
+}
+
+@media(max-width:600px){
+  .form-grid{ grid-template-columns:1fr; } /* мобильный столбик */
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.45);
+  box-shadow: 0 2px 8px rgba(56,135,246,0.03);
+  backdrop-filter: blur(4px);
+  transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(56,135,246,0.18);
+  outline: none;
+  background: rgba(255,255,255,0.75);
+}
+
+/* Обёртка */
+.glass-container {
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  color: #fff;
+}
+.glass-container h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+.form label {
+  display: block;
+  margin-bottom: 1rem;
+}
+.form span {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.form input {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+  font-size: 1rem;
+}
+.form button {
+  width: 100%;
+  padding: 0.75rem;
+  background: #4b6cb7; /* градиент можно добавить */
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background .3s;
+}
+.form button:hover {
+  background: #182848;
+}
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+.alert.success {
+  background: rgba(76, 175, 80, 0.2);
+  color: #b8f994;
+}
+.alert.error {
+  background: rgba(244, 67, 54, 0.2);
+  color: #ff8a80;
+}
+
+/* ===============================
+   Cards (Catalog Glassmorphism)
+   =============================== */
+.catalog {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 2rem;
+}
+
+.fabric-card {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-glass);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.24s cubic-bezier(.4,0,.2,1),
+    box-shadow var(--transition),
+    background var(--transition);
+  backdrop-filter: blur(var(--blur));
+  animation: glassFadeIn 0.7s cubic-bezier(.4,0,.2,1);
+}
+.fabric-card:hover {
+  transform: translateY(-8px) scale(1.025);
+  box-shadow: 0 8px 32px 0 rgba(56,135,246,0.18), 0 2px 4px rgba(56,135,246,0.12);
+  background: var(--color-surface-strong);
+}
+.fabric-card img {
+  object-fit: cover;
+  height: 180px;
+  width: 100%;
+  background: linear-gradient(120deg, #e0e7ef 60%, #c9d6ff 100%);
+  border-radius: var(--radius) var(--radius) 0 0;
+  transition: filter 0.32s;
+}
+.fabric-card:hover img {
+  filter: brightness(1.06) saturate(1.1) blur(0.5px);
+}
+.fabric-card-content {
+  padding: 1.2rem 1.2rem 1.3rem 1.2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.fabric-card h3 {
+  margin: 0.5rem 0 0.2rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.fabric-card p {
+  margin: 0.25rem 0;
+  color: var(--color-muted);
+  flex: 0;
+}
+.fabric-card a {
+  margin-top: auto;
+  align-self: flex-start;
+  font-weight: 500;
+  color: var(--color-primary);
+  background: none;
+  border: none;
+  transition: color var(--transition);
+}
+.fabric-card a:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+/* ===============================
+   Tables (Glassmorphism)
+   =============================== */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(255,255,255,0.35);
+  border: 1.5px solid rgba(180,200,255,0.24);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-glass);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+thead {
+  background: rgba(56,135,246,0.08);
+}
+th, td {
+  padding: 0.8rem 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(180,200,255,0.24);
+}
+th {
+  font-weight: 600;
+  color: var(--color-primary-hover);
+}
+tbody tr:nth-child(odd) {
+  background: rgba(255,255,255,0.45);
+}
+tbody tr:hover {
+  background: rgba(255,255,255,0.65);
+}
+/* ===============================
+   Notifications & Alerts (Glass)
+   =============================== */
+.errors, .success {
+  padding: 1.1rem 1.5rem;
+  border-radius: var(--radius);
+  color: var(--color-text);
+  margin-bottom: 1.2rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-glass);
+  backdrop-filter: blur(var(--blur));
+  border: 1.5px solid;
+  animation: glassFadeIn 0.7s cubic-bezier(.4,0,.2,1);
+}
+.errors {
+  background: var(--color-error-bg);
+  border-color: var(--color-error-border);
+}
+.success {
+  background: var(--color-success-bg);
+  border-color: var(--color-success-border);
+}
+
+/* ===============================
+   Footer (Glass)
+   =============================== */
+footer {
+  background: var(--color-surface);
+  text-align: center;
+  padding: 1.2rem 0;
+  border-top: 1.5px solid var(--color-border);
+  color: var(--color-muted);
+  border-radius: var(--radius) var(--radius) 0 0;
+  box-shadow: 0 -2px 12px rgba(56,135,246,0.03);
+  backdrop-filter: blur(var(--blur));
+  margin-top: auto;
+}
+
+/* ===============================
+   Utility Classes
+   =============================== */
+.text-center { text-align: center; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.hidden { display: none !important; }
+
+/* ===============================
+   Responsive Adjustments
+   =============================== */
+@media (max-width: 1024px) {
+  .header-inner, main {
+    max-width: 96vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
+  .catalog {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+}
+@media (max-width: 768px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+  nav {
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  .catalog {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 1.2rem;
+  }
+  .fabric-card img {
+    height: 120px;
+  }
+  main {
+    padding: 0 0.6rem;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+  form {
+    padding: 1rem 0.6rem;
+  }
+  input.glass-input,
+  select.glass-select {
+    width: 100%;
+  }
+  .filter-row {
+    margin-bottom: 1rem;
+  }
+}
+@media (max-width: 480px) {
+  .header-inner {
+    padding: 0.5rem 0.2rem;
+  }
+
+  .catalog {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .fabric-card img {
+    height: 80px;
+  }
+
+  .fabric-detail {
+    flex-direction: column;
+    padding: 1rem 0.4rem;
+    gap: 1rem;
+  }
+
+  .fabric-detail img {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .glass-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  /* Filter form mobile adjustments */
+  .filter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 1.5rem;
+  }
+
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .filter-field {
+    flex: 1;
+    min-width: 140px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .filter-field.small {
+    flex: 0 0 auto;
+    width: auto;
+  }
+
+  .filter-field .range {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .filter-field input,
+  .filter-field select {
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(var(--blur));
+    transition: border-color var(--transition);
+  }
+
+  .filter-checkboxes {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(var(--blur));
+    transition: background var(--transition), border-color var(--transition);
+  }
+
+  .checkbox-item input {
+    margin: 0;
+    width: auto;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+  }
+
+  .checkbox-item label {
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .checkbox-item input:checked + label {
+    color: var(--color-primary);
+  }
+
+  .actions {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    flex: 0 0 auto;
+  }
+
+  select {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(var(--blur));
+    transition: border-color var(--transition);
+  }
+}
+  /* ====== Responsive tweaks ====== */
+.fabric-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-glass);
+  margin-bottom: 2rem;
+  backdrop-filter: blur(var(--blur));
+  animation: glassFadeIn 0.7s cubic-bezier(.4,0,.2,1);
+}
+.fabric-detail img {
+  max-width: 400px;
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 12px rgba(56,135,246,0.07);
+}
+.fabric-detail dl {
+  display: grid;
+  grid-template-columns: max-content auto;
+  row-gap: 0.5rem;
+  column-gap: 1rem;
+  align-items: start;
+  flex: 1;
+}
+.fabric-detail dt {
+  font-weight: bold;
+  color: var(--color-text);
+}
+.fabric-detail dd {
+  margin: 0;
+  color: var(--color-muted);
+}
+.fabric-detail .price {
+  grid-column: 1 / -1;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  margin-top: 1rem;
+  text-shadow: 0 1px 8px rgba(56,135,246,0.10);
+}
+.fabric-detail .actions {
+  grid-column: 1 / -1;
+  margin-top: 1.5rem;
+}
+
+/* ===============================
+   Animations
+   =============================== */
+@keyframes glassFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+
+.filter-form {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  padding: 0;
+}
+
+/* === Toggle-панель фильтра === */
+.filter-toggle-wrapper {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+#filter-toggle {
+  cursor: pointer;
+  padding: 0.6rem 1.2rem;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  transition: background var(--transition);
+}
+#filter-toggle:hover {
+  background: var(--color-primary-hover);
+}
+
+/* Скрытый контейнер фильтра */
+#filter-wrapper {
+  /* переносим сюда тень, границу и скругления: */
+  box-shadow: var(--shadow-glass);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+  padding: 0; /* закрыт — без внутренних отступов */
+}
+
+/* Открытый фильтр (выставьте max-height > реальной высоты формы) */
+#filter-wrapper.open {
+  max-height: 900px;      /* достаточно, чтобы вместить форму */
+  padding: 1.2rem;        /* совпадает с padding у .filter-form до правок */
+}
+
+/* ===============================
+   Glassmorphism Custom Select & Checkbox
+   =============================== */
+/* Custom glass-style select */
+select.glass-select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  font: inherit;
+  color: #222d3a;
+  padding: 0.5em 1.5em 0.5em 0.75em;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23333' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75em center;
+  background-size: 0.6em;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+select.glass-select:hover {
+  background: rgba(255,255,255,0.20);
+  border-color: rgba(255,255,255,0.4);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.20);
+}
+select.glass-select:focus {
+  outline: none;
+  background: rgba(255,255,255,0.25);
+  border-color: rgba(56,135,246,0.7);
+  box-shadow: 0 0 0 3px rgba(56,135,246,0.5);
+}
+select.glass-select::-ms-expand {
+  display: none;
+}
+
+/* Custom glass-style checkbox */
+input[type="checkbox"].glass-checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 1.2em;
+  height: 1.2em;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 0.25em;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin: 0;
+  vertical-align: middle;
+  cursor: pointer;
+  position: relative;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+/* Custom glass-style text input */
+input.glass-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  font: inherit;
+  color: var(--color-text);
+  padding: 0.5em 1em;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+input.glass-input:hover {
+  background: rgba(255,255,255,0.20);
+}
+input.glass-input:focus {
+  outline: none;
+  background: rgba(255,255,255,0.25);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(56,135,246,0.5);
+}
+input[type="checkbox"].glass-checkbox:hover {
+  background: rgba(255,255,255,0.20);
+  border-color: rgba(255,255,255,0.4);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+input[type="checkbox"].glass-checkbox:focus {
+  outline: none;
+  border-color: rgba(56,135,246,0.7);
+  box-shadow: 0 0 0 3px rgba(56,135,246,0.5);
+}
+input[type="checkbox"].glass-checkbox:checked {
+  background: rgba(56,135,246,0.4);
+  border-color: rgba(56,135,246,0.7);
+}
+input[type="checkbox"].glass-checkbox:checked:hover {
+  background: rgba(56,135,246,0.5);
+  border-color: rgba(56,135,246,0.9);
+}
+input[type="checkbox"].glass-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  top: 0.15em;
+  left: 0.38em;
+  width: 0.35em;
+  height: 0.7em;
+  border: solid #fff;
+  border-width: 0 0.15em 0.15em 0;
+  transform: rotate(45deg);
+  box-sizing: border-box;
+}
+/* ===============================
+   Cabinet page: filter, table, notification
+   =============================== */
+
+/* Форма фильтра в кабинете */
+.cabinet-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: rgba(255,255,255,0.35);
+  border: 1.5px solid rgba(180,200,255,0.24);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-glass);
+  backdrop-filter: blur(var(--blur));
+  padding: 1.2rem;
+  margin-bottom: 2rem;
+}
+.cabinet-filter input[type="text"],
+.cabinet-filter select {
+  flex: 1 1 200px;
+  font: inherit;
+  padding: 0.6rem 1rem;
+  border: 1.5px solid rgba(180,200,255,0.24);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.45);
+  backdrop-filter: blur(4px);
+  transition: border-color var(--transition), background var(--transition);
+}
+.cabinet-filter input[type="text"]:focus,
+.cabinet-filter select:focus {
+  border-color: var(--color-primary);
+  background: rgba(255,255,255,0.75);
+  outline: none;
+}
+.cabinet-filter button {
+  flex: 0 0 auto;
+  padding: 0.6rem 1.2rem;
+  font: inherit;
+  border: none;
+  border-radius: var(--radius);
+  background: linear-gradient(120deg, #3887f6 60%, #7ee8fa 100%);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(56,135,246,0.13);
+  transition: transform 0.2s var(--transition), background var(--transition);
+}
+.cabinet-filter button:hover {
+  transform: translateY(-2px) scale(1.03);
+  background: linear-gradient(120deg, #2563eb 60%, #60b0f6 100%);
+}
+
+/* Уведомление */
+.notification {
+  background: rgba(76,175,80,0.2);
+  border: 1.5px solid #34d399;
+  color: #065f46;
+  padding: 0.8rem 1.2rem;
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-glass);
+  backdrop-filter: blur(var(--blur));
+  font-weight: 500;
+}
+
+/* ===== Стили пагинации ===== */
+.pagination {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+.pagination a {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  background: rgba(255,255,255,0.35);
+  border: 1.5px solid rgba(180,200,255,0.24);
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+.pagination a:hover {
+  background: rgba(255,255,255,0.65);
+  box-shadow: var(--shadow-glass);
+}
+.pagination a.active {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(56,135,246,0.15);
+}
+.pagination .page-link {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: background var(--transition), color var(--transition);
+}
+.pagination .page-link:hover {
+  background: var(--color-surface-strong);
+}
+.pagination .page-link.active {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(56,135,246,0.15);
+}
