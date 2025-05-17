@@ -13,7 +13,7 @@ requireAdmin();
 $stmt = $pdo->query("
     SELECT r.id AS request_id, r.created_at, u.name AS user_name, u.email,
            rs.name AS status_name,
-           f.name AS fabric_name, ri.quantity, f.price_rub
+           f.name AS fabric_name, f.price_rub
     FROM requests r
     JOIN users u ON r.user_id = u.id
     JOIN request_statuses rs ON r.status_id = rs.id
@@ -32,7 +32,7 @@ $sheet->setTitle('Заявки');
 // Заголовки
 $sheet->fromArray([
     'ID заявки', 'Дата', 'Пользователь', 'Email',
-    'Ткань', 'Количество', 'Цена за шт.', 'Сумма', 'Статус'
+    'Ткань', 'Сумма', 'Статус'
 ], NULL, 'A1');
 
 // Данные
@@ -43,10 +43,8 @@ foreach ($requests as $r) {
     $sheet->setCellValue("C$row", $r['user_name']);
     $sheet->setCellValue("D$row", $r['email']);
     $sheet->setCellValue("E$row", $r['fabric_name']);
-    $sheet->setCellValue("F$row", $r['quantity']);
-    $sheet->setCellValue("G$row", $r['price_rub']);
-    $sheet->setCellValue("H$row", $r['quantity'] * $r['price_rub']);
-    $sheet->setCellValue("I$row", $r['status_name']);
+    $sheet->setCellValue("F$row", $r['price_rub']);
+    $sheet->setCellValue("G$row", $r['status_name']);
     $row++;
 }
 
