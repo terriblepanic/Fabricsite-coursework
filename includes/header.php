@@ -13,6 +13,7 @@ require_once __DIR__ . '/csrf.php';
     <link rel="stylesheet" href="/fabricsite/assets/css/styles.css">
     <!-- AOS animations -->
     <link rel="stylesheet" href="/fabricsite/assets/css/aos.css">
+    <script src="/fabricsite/assets/js/scroll.js" defer></script>
 
     <!-- JS для валидации форм -->
     <script src="/fabricsite/assets/js/validate.js" defer></script>

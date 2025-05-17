@@ -154,18 +154,18 @@ require_once __DIR__ . '/../includes/header.php';
 
             <!-- 3. Чекбоксы: одна строка на всю ширину -->
             <div class="form-group full checkbox-line">
-                <label class="checkbox-item">
+                <div class="checkbox-item">
                     <input type="checkbox" class="glass-checkbox"
                            name="has_pattern" <?= !empty($_POST['has_pattern'])?'checked':'' ?>> С рисунком
-                </label>
-                <label class="checkbox-item">
+                </div>
+                <div class="checkbox-item">
                     <input type="checkbox" class="glass-checkbox"
                            name="has_defect" <?= !empty($_POST['has_defect'])?'checked':'' ?>> Есть дефекты
-                </label>
-                <label class="checkbox-item">
+                </div>
+                <div class="checkbox-item">
                     <input type="checkbox" class="glass-checkbox"
                            name="available" value="1" <?= !empty($_POST['available'])?'checked':'' ?>> В наличии
-                </label>
+                </div>
             </div>
 
             <!-- 4. Длина  +  Ширина -->
