@@ -1,0 +1,480 @@
+/* ===== Анимации
+   =============================== ===== */
+@keyframes glassFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Базовые контейнеры
+   =============================== ===== */
+/* Универсальная «стеклянная» панель-карточка */
+.glass-panel {
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow);
+  animation: glassFadeIn 0.6s ease;
+  padding: var(--spacing-xl);
+}
+
+/* Центровщик: держит макс-ширину и margin:auto */
+.centered {
+  width: 100%;
+  max-width: 680px;    /* подогнать при желании */
+  margin: 2.5rem auto; /* сверху-снизу и по центру */
+}
+
+/* Унифицированный стеклянный контейнер */
+.glass-container {
+  max-width: 400px;
+  margin: var(--spacing-xl) auto;
+  padding: var(--spacing-lg);
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow);
+  color: var(--color-text);
+}
+
+.glass-container h2 {
+  margin-bottom: var(--spacing-md);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* на мобильных чуть уже и меньше отступов */
+@media (max-width: 480px) {
+  .centered {
+    max-width: 95vw;
+    padding: var(--spacing-lg) var(--spacing-md);
+    margin: var(--spacing-lg) auto;
+  }
+  
+  .glass-panel {
+    padding: var(--spacing-lg);
+  }
+  
+  .glass-container {
+    padding: var(--spacing-md);
+  }
+}
+
+/* ===== Формы и поля ввода
+   =============================== ===== */
+/* Универсальная сетка для больших форм */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem 2rem;
+}
+
+/* группа = label + input */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.form-group label {
+  font-weight: 500;
+}
+
+/* растягиваем элемент на всю ширину сетки */
+.form-group.full {
+  grid-column: 1/-1;
+}
+
+/* Make the price field stretch across the entire form grid */
+@supports(selector(:has(*))) {
+  .form-group:has(input[name="price_rub"]) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Унифицированные стили формы */
+.form label {
+  display: block;
+  margin-bottom: var(--spacing-md);
+}
+
+.form span {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: 500;
+}
+
+.form-help {
+  font-size: 0.9em;
+  color: var(--color-text-muted);
+  margin-top: var(--spacing-xs);
+}
+
+.form button {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr; /* мобильный столбик */
+  }
+}
+
+/* ===== Базовые поля ввода
+   =============================== ===== */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--glass-shadow);
+  transition: border-color var(--transition), 
+              box-shadow var(--transition), 
+              background var(--transition);
+  color: var(--color-text);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: var(--glass-shadow);
+  outline: none;
+  background: var(--color-surface-strong);
+}
+
+/* ===== Кастомные стеклянные элементы формы
+   =============================== ===== */
+/* Glass Input */
+input.glass-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow);
+  font-size: inherit;
+  color: var(--color-text);
+  padding: 0.5em 1em;
+  transition: background var(--transition), 
+              border-color var(--transition), 
+              box-shadow var(--transition);
+}
+
+input.glass-input:hover {
+  background: var(--color-surface-strong);
+}
+
+input.glass-input:focus {
+  outline: none;
+  background: var(--color-surface-strong);
+  border-color: var(--color-primary);
+  box-shadow: var(--glass-shadow);
+}
+
+/* Custom glass-style select */
+select.glass-select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow);
+  font-size: inherit;
+  color: var(--color-text);
+  padding: 0.5em 1.5em 0.5em 0.75em;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23333' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75em center;
+  background-size: 0.6em;
+  transition: background var(--transition), 
+              border-color var(--transition), 
+              box-shadow var(--transition);
+}
+
+select.glass-select:hover {
+  background: var(--color-surface-strong);
+}
+
+select.glass-select:focus {
+  outline: none;
+  background: var(--color-surface-strong);
+  border-color: var(--color-primary);
+  box-shadow: var(--glass-shadow);
+}
+
+select.glass-select::-ms-expand {
+  display: none;
+}
+
+/* Custom glass-style checkbox */
+input[type="checkbox"].glass-checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 1.2em;
+  height: 1.2em;
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: 0.25em;
+  box-shadow: var(--glass-shadow);
+  margin: 0;
+  vertical-align: middle;
+  cursor: pointer;
+  position: relative;
+  transition: background var(--transition), 
+              border-color var(--transition), 
+              box-shadow var(--transition);
+  flex-shrink: 0; /* Prevent shrinking in flex containers */
+}
+
+input[type="checkbox"].glass-checkbox:hover {
+  background: var(--color-surface-strong);
+}
+
+input[type="checkbox"].glass-checkbox:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--glass-shadow);
+}
+
+input[type="checkbox"].glass-checkbox:checked {
+  background: rgba(56, 135, 246, 0.4);
+  border-color: var(--color-primary);
+}
+
+input[type="checkbox"].glass-checkbox:checked:hover {
+  background: rgba(56, 135, 246, 0.5);
+  border-color: var(--color-primary-hover);
+}
+
+input[type="checkbox"].glass-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  top: 0.15em;
+  left: 0.38em;
+  width: 0.35em;
+  height: 0.7em;
+  border: solid #fff;
+  border-width: 0 0.15em 0.15em 0;
+  transform: rotate(45deg);
+  box-sizing: border-box;
+}
+
+/* линия чекбоксов */
+.checkbox-line {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+/* ===== Кастомная кнопка "Выбрать файл"
+   =============================== ===== */
+input[type="file"].glass-input {
+  position: relative;       /* keep the input in normal flow */
+  overflow: hidden;         /* hide native button in some browsers */
+}
+
+input[type="file"].glass-input::file-selector-button,
+input[type="file"].glass-input::-webkit-file-upload-button {
+  font: inherit;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.55rem 1.4rem;
+  margin-right: 0.8rem;              /* little gap before filename text */
+  background: linear-gradient(120deg, var(--color-primary) 60%, #60b0f6 100%);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: var(--glass-shadow);
+  transition: background var(--transition),
+              transform 0.18s cubic-bezier(.4, 0, .2, 1);
+}
+
+input[type="file"].glass-input::file-selector-button:hover,
+input[type="file"].glass-input::-webkit-file-upload-button:hover {
+  background: linear-gradient(120deg, var(--color-primary-hover) 60%, #7ee8fa 100%);
+  transform: translateY(-1px);
+}
+
+/* ===== Уведомления и предупреждения
+   =============================== ===== */
+/* Unified alert styles */
+.alert {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text);
+  box-shadow: var(--glass-shadow);
+}
+
+.alert.success {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.alert.error {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+/* Уведомление */
+.notification {
+  background: rgba(76, 175, 80, 0.2);
+  border: var(--border-width) solid var(--color-success);
+  color: #065f46;
+  padding: 0.8rem 1.2rem;
+  border-radius: var(--radius);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: var(--glass-shadow);
+  font-weight: 500;
+}
+
+/* ===== Страница кабинета: фильтр, таблица, уведомления
+   =============================== ===== */
+/* Форма фильтра в кабинете */
+.cabinet-filter {
+  display: grid;
+  gap: var(--spacing-md);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow);
+  padding: 1.2rem;
+  margin-bottom: var(--spacing-xl);
+  align-items: baseline;
+  animation: glassFadeIn 0.7s cubic-bezier(.4, 0, .2, 1);
+}
+
+.cabinet-filter input[type="text"],
+.cabinet-filter select {
+  flex: 1 1 200px;
+  font: inherit;
+  padding: 0.6rem 1rem;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  transition: border-color var(--transition), background var(--transition);
+  max-height: 47px;
+}
+
+.cabinet-filter input[type="text"]:focus,
+.cabinet-filter select:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+/* ===== Профиль и настройки
+   =============================== ===== */
+.profile-section {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  animation: glassFadeIn 0.7s cubic-bezier(.4, 0, .2, 1);
+}
+
+.profile-form {
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+/* ===== Стили пагинации
+   =============================== ===== */
+.pagination {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.pagination .page-link {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: background var(--transition), color var(--transition);
+}
+
+.pagination .page-link:hover {
+  background: var(--color-surface-strong);
+  box-shadow: var(--glass-shadow);
+}
+
+.pagination .page-link.active {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: var(--glass-shadow);
+}
+
+/* ===== Стили сообщений и чата
+   =============================== ===== */
+.message-admin,
+.message-user {
+  padding: var(--spacing-md);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--glass-shadow);
+  margin-bottom: var(--spacing-md);
+  width: 80%;
+  animation: glassFadeIn 0.7s cubic-bezier(.4, 0, .2, 1);
+  color: var(--color-text);
+}
+
+.message-admin {
+  margin-left: auto;
+  border-left: 3px solid var(--color-primary);
+}
+
+.message-user {
+  margin-right: auto;
+  border-right: 3px solid var(--color-secondary);
+}
+
+.message-header {
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-xs);
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+.message-content {
+  line-height: var(--line-height-base);
+  color: var(--color-text);
+}
+
+/* ===== Мобильные оптимизации
+   =============================== ===== */
+@media (max-width: 480px) {
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .yellow-row {
+    flex-direction: column;
+  }
+  
+  .profile-section {
+    padding: var(--spacing-md);
+  }
+  
+  .message-admin,
+  .message-user {
+    width: 95%;
+  }
+}

@@ -193,29 +193,58 @@ $logs = $pdo->query("
         </thead>
         <tbody>
         <?php foreach($requests as $r): ?>
-            <tr>
+            <tr data-aos="fade-up">
                 <td>
                     <input type="checkbox" class="glass-checkbox" name="bulk_ids[]" value="<?=$r['request_id']?>">
                 </td>
-                <td><?=h($r['created_at'])?></td>
-                <td><?=h($r['user_name'])?></td>
-                <td><?=h($r['user_email'])?></td>
-                <td><?=h($r['fabric_name'])?></td>
-                <td><?=h($r['status_name'])?></td>
+                <td class="table-td"><?=h($r['created_at'])?></td>
+                <td class="table-td"><?=h($r['user_name'])?></td>
+                <td class="table-td"><?=h($r['user_email'])?></td>
+                <td class="table-td"><?=h($r['fabric_name'])?></td>
+                <td class="table-td"><?=h($r['status_name'])?></td>
                 <td class="actions">
-                    <input type="hidden" name="request_id" value="<?=$r['request_id']?>">
-                    <select name="status_id" class="glass-select">
-                        <?php foreach($statuses as $id=>$name): ?>
-                            <option value="<?=$id?>" <?=$id==$r['status_id']?'selected':''?>>
-                                <?=h($name)?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                    <button type="submit" class="btn btn-primary">Обновить</button>
-                    <input type="hidden" name="delete_fabric_id" value="<?=$r['fabric_id']?>">
-                    <button type="submit" class="btn btn-secondary" onclick="return confirm('Скрыть ткань?')">Удалить</button>
-                    <a href="edit_fabric.php?id=<?=$r['fabric_id']?>" class="btn btn-secondary">Редактировать</a>
-                    <a href="chat.php?request_id=<?=$r['request_id']?>" class="btn btn-secondary">Чат</a>
+                    <div class="action-buttons">
+                        <!-- 1. Форма “Обновить” остаётся как есть -->
+                        <form method="post">
+                        <?php csrf_field(); ?>
+                        <input type="hidden" name="request_id" value="<?=$r['request_id']?>">
+                        <select name="status_id" class="glass-select">
+                            <?php foreach($statuses as $id=>$name): ?>
+                            <option value="<?=$id?>" <?=$id==$r['status_id']?'selected':''?>><?=h($name)?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Обновить</button>
+                        </form>
+
+                        <!-- 2. Новый контейнер для жёлтых кнопок -->
+                        <div class="yellow-column">
+                            <div class="yellow-row">
+                                <!-- Удалить -->
+                                <form method="post">
+                                    <?php csrf_field(); ?>
+                                    <input type="hidden" name="delete_fabric_id" value="<?=$r['fabric_id']?>">
+                                    <button
+                                    type="submit"
+                                    class="btn btn-secondary"
+                                    onclick="return confirm('Скрыть ткань?')">
+                                    Удалить
+                                    </button>
+                                </form>
+                                <!-- Редактировать -->
+                                <a
+                                    href="edit_fabric.php?id=<?=$r['fabric_id']?>"
+                                    class="btn btn-secondary">
+                                    Редактировать
+                                </a>
+                            </div>
+                            <!-- Чат -->
+                            <a
+                                href="chat.php?request_id=<?=$r['request_id']?>"
+                                class="btn btn-secondary btn-chat">
+                                Чат
+                            </a>
+                        </div>
+                    </div>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -256,7 +285,7 @@ $logs = $pdo->query("
     </thead>
     <tbody>
     <?php foreach($logs as $lg): ?>
-        <tr>
+        <tr data-aos="fade-up">
             <td><?=h($lg['created_at'])?></td>
             <td><?=h($lg['admin_name'])?></td>
             <td><?=h($lg['action'])?></td>

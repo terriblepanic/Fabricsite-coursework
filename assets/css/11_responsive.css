@@ -1,0 +1,273 @@
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 1024px) {
+    .header-inner, main {
+        max-width: 96vw;
+        padding-left: 2vw;
+        padding-right: 2vw;
+    }
+    
+    .catalog {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.2rem;
+    }
+    
+    nav {
+        margin-top: 0.5rem;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+    
+    .catalog {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        gap: 1.2rem;
+    }
+    
+    .fabric-card img {
+        height: 120px;
+    }
+    
+    main {
+        padding: 0 0.6rem;
+        margin-top: 1.2rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    input.glass-input,
+    select.glass-select {
+        width: 100%;
+    }
+    
+    .filter-row {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-inner {
+        padding: 0.5rem 0.2rem;
+    }
+    
+    .catalog {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .fabric-card img {
+        height: 80px;
+    }
+    
+    .fabric-detail {
+        flex-direction: column;
+        padding: 1rem 0.4rem;
+        gap: 1rem;
+    }
+    
+    .fabric-detail img {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    
+    .glass-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    /* Filter form mobile adjustments */
+    .filter-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        padding: 1.5rem;
+    }
+    
+    .filter-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .filter-field {
+        flex: 1;
+        min-width: 140px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .filter-field.small {
+        flex: 0 0 auto;
+        width: auto;
+    }
+    
+    .filter-field .range {
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .filter-field input,
+    .filter-field select {
+        padding: 0.6rem 1rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.45);
+        transition: border-color var(--transition);
+    }
+    
+    .filter-checkboxes {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .actions {
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    
+    .btn {
+        flex: 0 0 auto;
+    }
+    
+    select {
+        padding: 0.6rem 0.8rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.45);
+        transition: border-color var(--transition);
+    }
+}
+
+/* ===== Checkboxes (Glassmorphic) ===== */
+.checkbox-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.45);
+    transition: background var(--transition), border-color var(--transition);
+}
+
+.checkbox-item input {
+    margin: 0;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+.checkbox-item label {
+    cursor: pointer;
+    font-weight: 500;
+}
+
+input[type="checkbox"].glass-checkbox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 1.2em;
+    height: 1.2em;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.25em;
+    box-shadow: var(--glass-shadow);
+    margin: 0;
+    vertical-align: middle;
+    cursor: pointer;
+    position: relative;
+    transition: all var(--transition);
+}
+
+input[type="checkbox"].glass-checkbox:checked {
+    background: rgba(56, 135, 246, 0.4);
+    border-color: rgba(56, 135, 246, 0.7);
+}
+
+input[type="checkbox"].glass-checkbox:checked::after {
+    content: "";
+    position: absolute;
+    top: 0.15em;
+    left: 0.38em;
+    width: 0.35em;
+    height: 0.7em;
+    border: solid #fff;
+    border-width: 0 0.15em 0.15em 0;
+    transform: rotate(45deg);
+    box-sizing: border-box;
+}
+
+/* ===== Fabric Detail Styling ===== */
+.fabric-detail {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    width: fit-content;
+    gap: 2rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--glass-shadow);
+    /* margin-bottom: 2rem; */
+    animation: glassFadeIn 0.7s cubic-bezier(.4, 0, .2, 1);
+    transition: all 0.3s ease;
+}
+
+.fabric-info {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: fit-content;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--glass-shadow);
+    gap: 0.1rem;
+}
+
+.fabric-detail h2 {
+    font-size: 1.8rem;
+    font-family: var(--font-heading);
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.fabric-detail img {
+    max-width: 400px;
+    width: 100%;
+    border-radius: var(--radius);
+    box-shadow: var(--glass-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0;
+}
+
+.fabric-detail img:hover {
+    transform: scale(1.05);
+    box-shadow: var(--glass-shadow);
+}
+
+.fabric-detail p {
+    font-size: 1rem;
+    color: var(--color-text);
+    margin: 0.4rem 0;
+    line-height: 1.4;
+}
+
+.fabric-detail strong {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.fabric-detail span {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--color-primary);
+}

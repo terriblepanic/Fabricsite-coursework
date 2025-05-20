@@ -61,23 +61,32 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php endif; ?>
 
     <?php foreach ($messages as $msg):
-        $isAdmin = ($msg['role_id'] === 1);
+        $isAdmin = ($msg['role_id'] == 1); // Changed to == for comparison
         $author = $isAdmin ? 'Администратор' : h($msg['user_name']);
+        $messageClass = $isAdmin ? 'message-admin' : 'message-user';
         $bg = $isAdmin ? 'rgba(0, 86, 179, 0.1)' : 'rgba(0, 128, 0, 0.1)';
     ?>
-        <div style="
+        <div class="chat-message <?= $messageClass ?><?= $isAdmin ? ' is-admin' : '' ?>" style="
             background: <?= $bg ?>;
             padding: 0.75rem;
             border-radius: var(--radius);
             margin-bottom: 0.75rem;
+            <?php if ($isAdmin): ?>
+            margin-left: auto;
+            width: 80%;
+            border-left: 3px solid #0056b3;
+            <?php else: ?>
+            margin-right: auto;
+            width: 80%;
+            <?php endif; ?>
         ">
-            <div style="font-weight:bold; color: var(--color-primary);">
+            <div class="message-header" style="font-weight:bold; color: var(--color-primary);">
                 <?= $author ?>
                 <small style="color: var(--color-muted); font-size: 0.85em;">
                     [<?= h($msg['created_at']) ?>]
                 </small>
             </div>
-            <p style="margin: 0.5rem 0;"><?= nl2br(h($msg['message'])) ?></p>
+            <p class="message-content" style="margin: 0.5rem 0;"><?= nl2br(h($msg['message'])) ?></p>
         </div>
     <?php endforeach; ?>
 </div>

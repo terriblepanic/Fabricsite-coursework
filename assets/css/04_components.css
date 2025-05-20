@@ -1,0 +1,207 @@
+/* ===== Кнопки (Glassmorphic)
+   =============================== ===== */
+
+/* Базовые стили кнопок */
+button, 
+.btn {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.65em 1.5em;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  background: var(--color-surface-strong);
+  color: var(--color-primary);
+  box-shadow: var(--glass-shadow);
+  transition: 
+    background var(--transition),
+    color var(--transition),
+    transform 0.18s cubic-bezier(.4, 0, .2, 1),
+    box-shadow var(--transition);
+  height: 47px; /* Стандартизированная высота */
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  line-height: 1;
+}
+
+button:focus,
+.btn:focus {
+  box-shadow: 0 0 0 3px rgba(56, 135, 246, 0.3), var(--glass-shadow);
+}
+
+button:active,
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Основная кнопка */
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.25);
+}
+
+/* Второстепенная кнопка */
+.btn-secondary {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: var(--border-width) solid var(--color-border);
+}
+
+.btn-secondary:hover,
+button.btn-secondary:hover {
+  background: var(--color-surface-strong);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(31, 38, 135, 0.15);
+}
+
+/* Небольшая кнопка */
+.btn-sm {
+  padding: 0.45em 1.15em;
+  font-size: 0.9rem;
+  height: 38px;  
+}
+
+/* Большая кнопка */
+.btn-lg {
+  padding: 0.7em 1.8em;
+  font-size: 1.05rem;
+  height: 54px;
+}
+
+/* Кнопка на всю ширину */
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+
+/* Кнопка с иконкой */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.btn-icon svg {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+/* Кнопка действия с фиксированной высотой для админки */
+.admin-filter .btn {
+  height: 47px;
+  padding-top: 0.65em;
+  padding-bottom: 0.65em;
+}
+
+/* ===== Расположение кнопок действий (универсальные)
+   =============================== ===== */
+.action-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-sm);
+  width: 100%;
+  flex-wrap: wrap;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow);
+  padding: var(--spacing-md);
+  border: var(--border-width) solid var(--color-border);
+  animation: glassFadeIn 0.7s cubic-bezier(.4, 0, .2, 1);
+}
+
+.action-buttons form {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: var(--spacing-xs);
+  flex: 1;
+}
+
+.action-buttons .btn {
+  height: 48px;
+  min-width: 120px;
+  white-space: nowrap;
+}
+
+.action-buttons .glass-select {
+  flex: 1 1 0;
+  min-width: 0;
+  width: 100%;
+}
+
+/* Макеты колонок/строк (желтые секции) */
+.yellow-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.yellow-row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-sm);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.yellow-row > form,
+.yellow-row > a {
+  flex: 1 1 0;
+  min-width: 150px;
+}
+
+.yellow-row .btn-secondary {
+  width: 100%;
+}
+
+/* Группа кнопок (слитые вместе) */
+.btn-group {
+  display: inline-flex;
+}
+
+.btn-group .btn:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.btn-group .btn:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 600px) {
+  .yellow-row {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .yellow-row > form,
+  .yellow-row > a {
+    width: 100%;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .action-buttons form {
+    flex-direction: column;
+  }
+  
+  .action-buttons .btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,21 @@
+/* ===== Notifications & Alerts (Glass)
+   =============================== ===== */
+.errors, .success {
+  padding: 1.1rem 1.5rem;
+  border-radius: var(--radius);
+  color: var(--color-text);
+  margin-bottom: 1.2rem;
+  font-weight: 500;
+  box-shadow: var(--glass-shadow);
+  border: 1.5px solid;
+  animation: glassFadeIn 0.7s cubic-bezier(.4,0,.2,1);
+}
+.errors {
+  background: var(--color-error-bg);
+  border-color: var(--color-error-border);
+}
+.success {
+  background: var(--color-success-bg);
+  border-color: var(--color-success-border);
+}
+

@@ -27,16 +27,18 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     }catch(PDOException $e){$pdo->rollBack();$error=$e->getMessage();}
 }
 ?>
-<h2>Оформление заявки</h2>
-<p><strong><?=h($fabric['name'])?></strong> — <?=h($fabric['price_rub'])?> ₽</p>
+<div class="fabric-info">
+    <h2>Оформление заявки</h2>
+    <p><strong><?=h($fabric['name'])?></strong> — <?=h($fabric['price_rub'])?> ₽</p>
 
-<?php if($success):?>
-    <p class="success">Заявка отправлена!</p>
-    <p><a href="index.php">Вернуться в каталог</a></p>
-<?php else:?>
-    <?php if($error):?><p class="errors"><?=h($error)?></p><?php endif;?>
-    <form method="post"><?php csrf_field();?>
-        <button type="submit">Подтвердить заявку</button>
-    </form>
-<?php endif;?>
+    <?php if($success):?>
+        <p class="success">Заявка отправлена!</p>
+        <p><a href="index.php">Вернуться в каталог</a></p>
+    <?php else:?>
+        <?php if($error):?><p class="errors"><?=h($error)?></p><?php endif;?>
+        <form method="post"><?php csrf_field();?>
+            <button type="submit">Подтвердить заявку</button>
+        </form>
+    <?php endif;?>
+</div>
 <?php require_once __DIR__.'/includes/footer.php'; ?>

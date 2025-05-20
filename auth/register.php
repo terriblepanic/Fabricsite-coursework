@@ -62,8 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php require_once __DIR__ . '/../includes/header.php'; ?>
 
-<h2>Регистрация</h2>
-
 <?php if (!empty($errors)): ?>
     <div class="errors">
         <ul>
@@ -74,8 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 <?php endif; ?>
 
-<form method="post" data-validate data-aos="fade-right">
+<form method="post" data-validate data-aos="fade-right" class="form-register">
     <?php csrf_field(); ?>
+    <h2>Регистрация</h2>
     <label>Имя: <input type="text" name="name" required></label><br>
     <label>Email: <input type="email" name="email" required></label><br>
     <label>Пароль: <input type="password" name="password" required></label><br>

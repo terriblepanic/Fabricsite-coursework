@@ -45,14 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php require_once __DIR__ . '/../includes/header.php'; ?>
 
-<h2>Вход</h2>
-
 <?php if ($errors): ?>
     <div class="errors"><ul><?php foreach ($errors as $e): ?><li><?= htmlspecialchars($e) ?></li><?php endforeach; ?></ul></div>
 <?php endif; ?>
 
-<form method="post" data-validate data-aos="fade-right">
+<form method="post" data-validate data-aos="fade-right" class="form-login">
     <?php csrf_field(); ?>                          <!-- токен -->
+    <h2>Вход в личный кабинет</h2>
     <label>Email: <input type="email" name="email" required></label><br>
     <label>Пароль: <input type="password" name="password" required></label><br>
     <button type="submit">Войти</button>

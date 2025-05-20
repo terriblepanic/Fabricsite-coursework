@@ -101,14 +101,13 @@ $totalPages = (int)ceil($totalRows / $perPage);
 
 <!-- Кнопка-тоггл -->
 <div class="filter-toggle-wrapper">
-    <button id="filter-toggle" type="button" class="btn btn-primary">
+    <button id="filter-toggle" type="button">
         <?= $filterOpen ? 'Скрыть фильтр' : 'Показать фильтр' ?>
     </button>
 </div>
 
 <!-- Панель фильтра -->
-<div id="filter-wrapper" class="filter-wrapper<?= $filterOpen ? ' open' : '' ?>">
-    <form method="get" class="filter-form">
+    <form method="get" id="filter-wrapper" class="filter-wrapper filter-form<?= $filterOpen ? ' open' : '' ?>">
         <div class="filter-row">
             <div class="filter-field">
                 <input type="text" name="search" placeholder="Поиск по названию"
@@ -147,7 +146,7 @@ $totalPages = (int)ceil($totalRows / $perPage);
             </div>
         </div>
 
-        <div class="filter-row">
+        <div class="filter-row-field">
             <div class="filter-field small">
                 <label>Цена</label>
                 <div class="range">
@@ -171,7 +170,7 @@ $totalPages = (int)ceil($totalRows / $perPage);
         </div>
 
         <div class="filter-row actions">
-            <button type="submit" class="btn btn-primary">Найти</button>
+            <button type="submit">Найти</button>
             <div class="filter-field small">
                 <select name="sort" class="glass-select sort-select">
                     <option value="date_desc"  <?= $sort=='date_desc'?'selected':''?>>Сначала новые</option>
@@ -182,7 +181,6 @@ $totalPages = (int)ceil($totalRows / $perPage);
             </div>
         </div>
     </form>
-</div>
 
 <?php if (!$fabrics): ?>
     <p>Ничего не найдено.</p>

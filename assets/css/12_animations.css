@@ -1,0 +1,40 @@
+/* ===== Animations ===== */
+@keyframes glassFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.98);
+        filter: blur(var(--glass-blur));
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* === Filter Toggle Panel === */
+.filter-toggle-wrapper {
+    text-align: center;
+    animation: glassFadeIn 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Filter Container (Hidden State) */
+#filter-wrapper {
+    /* Shadow, border and border-radius */
+    box-shadow: var(--glass-shadow);
+    /* border: 1.5px solid var(--color-border); */
+    border-radius: var(--radius);
+    
+    /* Transition properties */
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0; /* Closed - no internal padding */
+}
+
+/* Filter Container (Open State) */
+#filter-wrapper.open {
+    max-height: 900px; /* Sufficient to fit the form */
+    padding: 2.2rem; /* Matches padding of .filter-form */
+}

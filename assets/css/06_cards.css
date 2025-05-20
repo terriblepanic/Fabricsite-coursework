@@ -1,0 +1,92 @@
+/* ===== Cards (Catalog Glassmorphism) ===== */
+
+/* Catalog Grid Layout */
+.catalog {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    /* This line makes all cells the same height within a row */
+    grid-auto-rows: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Card Base Styling */
+.fabric-card {
+    height: 26rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius);
+    box-shadow: var(--glass-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: glassFadeIn 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s var(--transition);
+}
+
+/* Card Hover Effects */
+.fabric-card:hover {
+    transform: translateY(-6px) scale(1.025);
+    box-shadow: var(--glass-shadow);
+    background: var(--color-surface-strong);
+}
+
+/* Card Image */
+.fabric-card img {
+    display: block;
+    object-fit: cover;
+    height: 180px;
+    width: 100%;
+    background: linear-gradient(120deg, #e0e7ef 60%, #c9d6ff 100%);
+    border-radius: var(--radius) var(--radius) 0 0;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.fabric-card:hover img {
+    transform: scale(1.03);
+    filter: brightness(1.1);
+}
+
+/* Card Content Area */
+.fabric-card-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    position: relative;
+    padding: 1.2rem;
+}
+
+.fabric-card-content h3 {
+    margin: 0 0 0.5rem;
+    color: var(--color-primary);
+    text-shadow: 0 1px 3px rgba(56, 135, 246, 0.2);
+}
+
+.fabric-card-content p {
+    margin: 0.1rem 0;
+    color: var(--color-text);
+    opacity: 0.9;
+}
+
+/* Card Link/Button */
+.fabric-card-content a {
+    display: inline-block;
+    margin-top: auto; /* pushes to bottom */
+    align-self: flex-start; /* left alignment */
+    padding: 0.5rem 0.8rem;
+    background: rgba(255, 255, 255, 0.25);
+    /* border: 1px solid rgba(255, 255, 255, 0.6); */
+    border-radius: var(--radius);
+    color: var(--color-primary-hover);
+    font-weight: 500;
+    transition:
+        background 0.25s var(--transition),
+        color 0.25s var(--transition),
+        transform 0.2s ease;
+}
+
+.fabric-card-content a:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+    color: var(--color-primary);
+}

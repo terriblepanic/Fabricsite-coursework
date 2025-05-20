@@ -9,8 +9,20 @@ require_once __DIR__ . '/csrf.php';
     <title>Магазин тканей «Чудотворец»</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <!-- Glassmorphic stylesheet -->
-    <link rel="stylesheet" href="/fabricsite/assets/css/styles.css">
+    <!-- Glassmorphic stylesheets (split) -->
+    <link rel="stylesheet" href="/fabricsite/assets/css/00_variables.css">
+    <link rel="stylesheet" href="/fabricsite/assets/css/01_base.css">
+    <link rel="stylesheet" href="/fabricsite/assets/css/02_layout.css">
+    <link rel="stylesheet" href="/fabricsite/assets/css/03_typography.css">
+    <link rel="stylesheet" href="/fabricsite/assets/css/04_components.css">
+    <link rel="stylesheet" href="/fabricsite/assets/css/05_forms.css">
+    <link rel="stylesheet" href="/fabricsite/assets/css/06_cards.css">
+    <link rel="stylesheet" href="/fabricsite/assets/css/07_tables.css">
+    <link rel="stylesheet" href="/fabricsite/assets/css/08_alerts.css">
+    <link rel="stylesheet" href="/fabricsite/assets/css/09_chat.css">
+    <link rel="stylesheet" href="/fabricsite/assets/css/10_utilities.css">
+    <link rel="stylesheet" href="/fabricsite/assets/css/11_responsive.css">
+    <link rel="stylesheet" href="/fabricsite/assets/css/12_animations.css">
     <!-- AOS animations -->
     <link rel="stylesheet" href="/fabricsite/assets/css/aos.css">
     <script src="/fabricsite/assets/js/scroll.js" defer></script>
@@ -20,9 +32,10 @@ require_once __DIR__ . '/csrf.php';
     <link rel="icon" href="/fabricsite/assets/img/favicon.ico">
 </head>
 <body>
+<div class="background"></div>
 <header>
     <div class="header-inner">
-        <div class="logo"><a href="/fabricsite/index.php">Чудотворец</a></div>
+        <div><a class="logo" href="/fabricsite/index.php">Чудотворец</a></div>
         <nav>
             <a href="/fabricsite/index.php">Каталог</a>
             <?php if (!empty($_SESSION['user'])): ?>
@@ -41,3 +54,4 @@ require_once __DIR__ . '/csrf.php';
     </div>
 </header>
 <main>
+    

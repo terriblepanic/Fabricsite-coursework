@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <?php require_once __DIR__ . '/../includes/header.php'; ?>
 
-    <section class="glass-container aos-init" data-aos="fade-up">
+    <section class="form-login aos-init" data-aos="fade-up">
         <h2>Новый пароль</h2>
 
         <?php if ($message): ?>

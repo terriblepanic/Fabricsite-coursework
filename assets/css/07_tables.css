@@ -1,0 +1,72 @@
+/* ===== Tables (Glassmorphism) ===== */
+
+/* Standardized Table Styles */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--color-surface);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--radius);
+    box-shadow: var(--glass-shadow);
+    margin-bottom: var(--spacing-xl);
+}
+
+th, td {
+    padding: 0.8rem 1.2rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(180, 200, 255, 0.24);
+}
+
+th {
+    font-weight: 600;
+    color: var(--color-primary-hover);
+}
+
+td:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.table-td {
+    padding: 0.8rem 1.2rem;
+    color: var(--color-text);
+    font-size: 1rem;
+}
+
+.table-td:hover {
+    background: rgb(255, 255, 255);
+}
+
+/* Table Row Styling */
+tbody tr:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.45);
+}
+
+tbody tr:hover {
+    background: rgba(255, 255, 255, 0.65);
+}
+
+/* Layout Components */
+.range {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    width: 100%;
+    align-items: baseline;
+}
+
+.filter-row-field {
+    display: grid;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.bulk-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    align-items: baseline;
+}

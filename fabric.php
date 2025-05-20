@@ -23,12 +23,11 @@ if (!$fabric) {
 }
 ?>
 
-    <h2><?=h($fabric['name'])?></h2>
-
     <div class="fabric-detail">
         <img src="<?=h('/fabricsite/'.$fabric['image_path'])?>" alt="<?=h($fabric['name'])?>" width="300">
 
-        <div>
+        <div class="fabric-info">
+            <h2><?=h($fabric['name'])?></h2>
             <p><strong>Тип:</strong> <?=h($fabric['type_name'])?></p>
             <p><strong>Цвет:</strong> <?=h($fabric['color_name'])?></p>
 

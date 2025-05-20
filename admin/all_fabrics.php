@@ -42,7 +42,7 @@ $fabrics = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <th>Действия</th>
         </tr>
         <?php foreach ($fabrics as $f): ?>
-            <tr>
+            <tr data-aos="fade-up">
                 <td><?= htmlspecialchars($f['name']) ?></td>
                 <td><?= htmlspecialchars($f['type_name']) ?></td>
                 <td><?= htmlspecialchars($f['price_rub']) ?> ₽</td>

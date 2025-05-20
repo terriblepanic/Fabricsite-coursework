@@ -1,0 +1,103 @@
+/* ===== Типографика
+   =============================== ===== */
+
+/* Базовые стили текста */
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-text);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Заголовки */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text);
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 8px rgba(56, 135, 246, 0.04);
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.75em;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 0.75em;
+}
+
+h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0.6em;
+}
+
+h4 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5em;
+}
+
+h5 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5em;
+}
+
+h6 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5em;
+}
+
+/* Стеклянные заголовки с подсветкой */
+.glass-heading {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.15em;
+}
+
+.glass-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), transparent);
+  border-radius: 1.5px;
+}
+
+/* Основные текстовые блоки */
+p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+/* Выделенные абзацы */
+.lead {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  margin-bottom: 1.5em;
+  color: var(--color-text);
+}
+
+/* Мелкий текст */
+small, .small {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+/* Стили списков */
+ul, ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1em;
+}
+
+li {
+  margin-bottom: 0.5em;
+}

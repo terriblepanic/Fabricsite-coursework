@@ -14,6 +14,69 @@ function h($s) {
     return htmlspecialchars($s, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8');
 }
 
+// User profile handling
+$user = $_SESSION['user'];
+$profileErrors = [];
+$profileSuccess = false;
+
+// Handle profile update form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_profile'])) {
+    csrf_check();
+
+    // Get form data
+    $name = trim($_POST['name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $confirm = $_POST['confirm_password'] ?? '';
+
+    // Validation
+    if ($name === '' || $email === '') {
+        $profileErrors[] = 'Имя и Email обязательны.';
+    }
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $profileErrors[] = 'Некорректный Email.';
+    }
+    
+    // Check email uniqueness only if changed
+    if ($email !== $user['email']) {
+        $stmt = $pdo->prepare('SELECT id FROM users WHERE email = ? AND id != ?');
+        $stmt->execute([$email, $user['id']]);
+        if ($stmt->fetch()) {
+            $profileErrors[] = 'Email уже занят другим пользователем.';
+        }
+    }
+
+    // Password validation if provided
+    $updatePassword = false;
+    if ($password !== '' || $confirm !== '') {
+        if ($password !== $confirm) {
+            $profileErrors[] = 'Пароли не совпадают.';
+        } elseif (strlen($password) < 6) {
+            $profileErrors[] = 'Пароль должен быть не менее 6 символов.';
+        } else {
+            $updatePassword = true;
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+        }
+    }
+
+    // Update profile if no errors
+    if (empty($profileErrors)) {
+        if ($updatePassword) {
+            $stmt = $pdo->prepare('UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?');
+            $stmt->execute([$name, $email, $hash, $user['id']]);
+        } else {
+            $stmt = $pdo->prepare('UPDATE users SET name = ?, email = ? WHERE id = ?');
+            $stmt->execute([$name, $email, $user['id']]);
+        }
+        
+        // Update session
+        $_SESSION['user']['name'] = $name;
+        $_SESSION['user']['email'] = $email;
+        
+        $profileSuccess = true;
+    }
+}
+
 // Filters & pagination
 $q = trim($_GET['q'] ?? '');
 $st = (int)($_GET['status'] ?? 0);
@@ -122,9 +185,9 @@ foreach ($requests as $r) {
     </div>
 <?php endif; ?>
 
+    <div class="cabinet-filter">
+    <h3>Мои заявки</h3>
     <p><a href="export_pdf.php" target="_blank">📄 Скачать PDF</a></p>
-
-    <h2>Мои заявки</h2>
 
 <?php if (empty($requests)): ?>
     <p>Заявок не найдено.</p>
@@ -151,7 +214,7 @@ foreach ($requests as $r) {
         </thead>
         <tbody>
         <?php foreach ($requests as $r): ?>
-            <tr style="background-color: <?= $rowColors[$r['status_id']] ?? '' ?>;">
+            <tr data-aos="fade-up" style="background-color: <?= $rowColors[$r['status_id']] ?? '' ?>;">
                 <td><?= h($r['request_id']) ?></td>
                 <td><?= h($r['created_at']) ?></td>
                 <td><?= h($r['fabric_name']) ?></td>
@@ -197,5 +260,58 @@ foreach ($requests as $r) {
         </div>
     <?php endif; ?>
 <?php endif; ?>
+    </div>
+
+<div class="cabinet-filter">
+    <h3>Редактирование профиля</h3>
+    
+    <?php if ($profileSuccess): ?>
+        <p class="success">Профиль успешно обновлен.</p>
+    <?php endif; ?>
+
+    <?php if (!empty($profileErrors)): ?>
+        <div class="errors">
+            <ul>
+                <?php foreach ($profileErrors as $error): ?>
+                    <li><?= h($error) ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
+
+    <form method="post" class="profile-form">
+        <?php csrf_field(); ?>
+        <input type="hidden" name="update_profile" value="1">
+        
+        <div class="form-group">
+            <label>Имя:<br>
+                <input type="text" name="name" value="<?= h($_SESSION['user']['name']) ?>" required 
+                       class="glass-input">
+            </label>
+        </div>
+
+        <div class="form-group">
+            <label>Email:<br>
+                <input type="email" name="email" value="<?= h($_SESSION['user']['email']) ?>" required 
+                       class="glass-input">
+            </label>
+        </div>
+
+        <div class="form-group">
+            <p class="form-help">Оставьте поля пароля пустыми, если не хотите его менять</p>
+            <label>Новый пароль:<br>
+                <input type="password" name="password" class="glass-input">
+            </label>
+        </div>
+
+        <div class="form-group">
+            <label>Подтвердите пароль:<br>
+                <input type="password" name="confirm_password" class="glass-input">
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    </form>
+</div>
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
